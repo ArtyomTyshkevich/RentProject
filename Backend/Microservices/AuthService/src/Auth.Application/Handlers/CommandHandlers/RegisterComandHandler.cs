@@ -43,7 +43,7 @@ namespace UserService.BLL.Handlers.CommandHandlers
         {
             return new User
             {
-                Nickname = request.Nickname,
+                Name = request.Nickname,
                 Email = request.Email,
                 UserName = request.Email
             };
