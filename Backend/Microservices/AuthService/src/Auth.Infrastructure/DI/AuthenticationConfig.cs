@@ -62,10 +62,10 @@ namespace UserService.DAL.DI
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<AuthDbContext>()
-                .AddUserManager<UserManager<User>>()
-                .AddSignInManager<SignInManager<User>>()
+            services.AddIdentity<UserEntity, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<UserDbContext>()
+                .AddUserManager<UserManager<UserEntity>>()
+                .AddSignInManager<SignInManager<UserEntity>>()
                 .AddDefaultTokenProviders();
         }
     }

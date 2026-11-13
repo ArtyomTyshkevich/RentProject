@@ -8,27 +8,27 @@ namespace Library.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AuthDbContext _authDbContext;
+        private readonly UserDbContext _authDbContext;
 
-        public UserRepository(AuthDbContext authDbContext)
+        public UserRepository(UserDbContext authDbContext)
         {
             _authDbContext = authDbContext;
         }
 
-        public async Task<List<User>> GetAsync(CancellationToken cancellationToken)
+        public async Task<List<UserEntity>> GetAsync(CancellationToken cancellationToken)
         {
             return await _authDbContext.Users
                                             .Include(user => user.UserName)
                                             .ToListAsync(cancellationToken);
         }
 
-        public async Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<UserEntity?> GetByIdAsync(Guid userId, CancellationToken cancellationToken)
         {
             return await _authDbContext.Users
                                  .FirstOrDefaultAsync(user => user.Id == userId, cancellationToken);
         }
 
-        public async Task<List<IdentityRole<Guid>>> GetRolesAsync(User user, CancellationToken cancellationToken)
+        public async Task<List<IdentityRole<Guid>>> GetRolesAsync(UserEntity user, CancellationToken cancellationToken)
         {
             var roles = await _authDbContext.Roles
                 .Where(role => _authDbContext.UserRoles
@@ -40,12 +40,12 @@ namespace Library.Data.Repositories
             return roles;
         }
 
-        public async Task<User> GetByEmailAsync(string Email, CancellationToken cancellationToken)
+        public async Task<UserEntity> GetByEmailAsync(string Email, CancellationToken cancellationToken)
         {
             return await _authDbContext.Users
                 .FirstAsync(user => user.Email == Email, cancellationToken);
         }
-        public async Task UpdateAsync(User user, CancellationToken cancellationToken = default)
+        public async Task UpdateAsync(UserEntity user, CancellationToken cancellationToken = default)
         {
             _authDbContext.Users
                 .Update(user);

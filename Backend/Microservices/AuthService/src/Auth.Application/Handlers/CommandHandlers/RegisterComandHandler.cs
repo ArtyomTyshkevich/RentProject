@@ -13,9 +13,9 @@ namespace UserService.BLL.Handlers.CommandHandlers
     {
         private readonly IMediator _mediator;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<UserEntity> _userManager;
 
-        public RegisterCommandHandler(IMediator mediator, IUnitOfWork unitOfWork, UserManager<User> userManager)
+        public RegisterCommandHandler(IMediator mediator, IUnitOfWork unitOfWork, UserManager<UserEntity> userManager)
         {
             _mediator = mediator;
             _unitOfWork = unitOfWork;
@@ -26,8 +26,9 @@ namespace UserService.BLL.Handlers.CommandHandlers
         {
             var user = CreateRegisterUser(request.RegisterRequest);
             var result = await _unitOfWork.UserManagers.CreateUserAsync(user, request.RegisterRequest.Password);
-            if (!result.Succeeded) throw new UserCreationFailedException();
-            await _unitOfWork.UserManagers.AddToRoleAsync(user);
+            var createdUser = await _unitOfWork.UserManagers.FindByEmailAsync(request.RegisterRequest.Email);
+
+            await _unitOfWork.UserManagers.AddToRoleAsync(createdUser);
             var authQuery = new AuthenticateQuery
             {
                 AuthRequest = new AuthRequest
@@ -39,9 +40,9 @@ namespace UserService.BLL.Handlers.CommandHandlers
             return await _mediator.Send(authQuery, cancellationToken);
         }
 
-        private User CreateRegisterUser(RegisterRequest request)
+        private UserEntity CreateRegisterUser(RegisterRequest request)
         {
-            return new User
+            return new UserEntity
             {
                 Name = request.Nickname,
                 Email = request.Email,

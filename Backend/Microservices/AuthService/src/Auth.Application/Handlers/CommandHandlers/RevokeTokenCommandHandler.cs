@@ -10,7 +10,7 @@ namespace UserService.BLL.Handlers.CommandHandlers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public RevokeTokenCommandHandler(UserManager<User> userManager, IUnitOfWork unitOfWork)
+        public RevokeTokenCommandHandler(UserManager<UserEntity> userManager, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -37,7 +37,7 @@ namespace UserService.BLL.Handlers.CommandHandlers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public RevokeAllTokensCommandHandler(UserManager<User> userManager, IUnitOfWork unitOfWork)
+        public RevokeAllTokensCommandHandler(UserManager<UserEntity> userManager, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

@@ -41,7 +41,7 @@ namespace UserService.BLL.Handlers.QuerieHandlers
             };
         }
 
-        private async Task<User> ValidateUserCredentials(AuthRequest request, CancellationToken cancellationToken)
+        private async Task<UserEntity> ValidateUserCredentials(AuthRequest request, CancellationToken cancellationToken)
         {
             var managedUser = await _unitOfWork.UserManagers.FindByEmailAsync(request.Email);
             if (managedUser == null || !await _unitOfWork.UserManagers.CheckPasswordAsync(managedUser, request.Password))
@@ -53,7 +53,7 @@ namespace UserService.BLL.Handlers.QuerieHandlers
             return user;
         }
 
-        private void UpdateUserTokenAndExpiry(User user)
+        private void UpdateUserTokenAndExpiry(UserEntity user)
         {
             user.RefreshToken = _configuration.GenerateRefreshToken();
             user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_configuration.GetSection("Jwt:RefreshTokenValidityInDays").Get<int>());

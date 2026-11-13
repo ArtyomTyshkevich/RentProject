@@ -11,12 +11,12 @@ namespace UserService.BLL.Repositories.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AuthDbContext _userDbContext;
-        private readonly UserManager<User> _userManager;
+        private readonly UserDbContext _userDbContext;
+        private readonly UserManager<UserEntity> _userManager;
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _configuration;
 
-        public UnitOfWork(AuthDbContext libraryDbContext, IWebHostEnvironment env, IConfiguration configuration, UserManager<User> userManager)
+        public UnitOfWork(UserDbContext libraryDbContext, IWebHostEnvironment env, IConfiguration configuration, UserManager<UserEntity> userManager)
         {
             _env = env;
             _userDbContext = libraryDbContext;

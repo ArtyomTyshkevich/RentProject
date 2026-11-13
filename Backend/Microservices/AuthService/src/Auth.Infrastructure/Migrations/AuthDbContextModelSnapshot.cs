@@ -10,7 +10,7 @@ using UserService.DAL.Data;
 
 namespace User.DAL.Migrations
 {
-    [DbContext(typeof(AuthDbContext))]
+    [DbContext(typeof(UserDbContext))]
     partial class AuthDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -204,7 +204,7 @@ namespace User.DAL.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("UserService.DAL.Entities.User", b =>
+            modelBuilder.Entity("UserService.DAL.Entities.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -299,7 +299,7 @@ namespace User.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("UserService.DAL.Entities.User", null)
+                    b.HasOne("UserService.DAL.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -308,7 +308,7 @@ namespace User.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("UserService.DAL.Entities.User", null)
+                    b.HasOne("UserService.DAL.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -323,7 +323,7 @@ namespace User.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UserService.DAL.Entities.User", null)
+                    b.HasOne("UserService.DAL.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -332,7 +332,7 @@ namespace User.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("UserService.DAL.Entities.User", null)
+                    b.HasOne("UserService.DAL.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -348,7 +348,7 @@ namespace User.DAL.Migrations
 
             modelBuilder.Entity("UserService.DAL.Entities.Review", b =>
                 {
-                    b.HasOne("UserService.DAL.Entities.User", "Reviewer")
+                    b.HasOne("UserService.DAL.Entities.UserEntity", "Reviewer")
                         .WithMany("Reviews")
                         .HasForeignKey("ReviewerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -362,7 +362,7 @@ namespace User.DAL.Migrations
                     b.Navigation("Pros");
                 });
 
-            modelBuilder.Entity("UserService.DAL.Entities.User", b =>
+            modelBuilder.Entity("UserService.DAL.Entities.UserEntity", b =>
                 {
                     b.Navigation("Reviews");
                 });
