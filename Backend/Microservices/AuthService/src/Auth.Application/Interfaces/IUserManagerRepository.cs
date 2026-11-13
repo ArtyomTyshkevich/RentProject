@@ -5,13 +5,13 @@ namespace UserService.BLL.Interfaces
 {
     public interface IUserManagerRepository
     {
-        Task<IdentityResult> CreateUserAsync(User user, string password);
-        Task<IdentityResult> DeleteUserAsync(User user);
-        Task<User> FindByNameAsync(string name);
-        Task<User> FindByEmailAsync(string email);
-        Task<bool> CheckPasswordAsync(User user, string password);
-        Task<IdentityResult> UpdateUserAsync(User user);
-        Task<IdentityResult> AddToRoleAsync(User user);
-        Task<List<User>> UsersToListAsync(CancellationToken cancellationToken);
+        Task<IdentityResult> CreateUserAsync(UserEntity user, string password);
+        Task<IdentityResult> DeleteUserAsync(UserEntity user);
+        Task<UserEntity> FindByNameAsync(string name);
+        Task<UserEntity> FindByEmailAsync(string email);
+        Task<bool> CheckPasswordAsync(UserEntity user, string password);
+        Task<IdentityResult> UpdateUserAsync(UserEntity user);
+        Task<IdentityResult> AddToRoleAsync(UserEntity user);
+        Task<List<UserEntity>> UsersToListAsync(CancellationToken cancellationToken);
     }
 }

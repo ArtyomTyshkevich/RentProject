@@ -18,7 +18,7 @@ namespace UserService.BLL.Handlers.CommandHandlers
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RefreshTokenComandHandler(IMediator mediator, UserManager<User> userManager, IConfiguration configuration, IUnitOfWork unitOfWork)
+        public RefreshTokenComandHandler(IMediator mediator, UserManager<UserEntity> userManager, IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _mediator = mediator;
@@ -38,7 +38,7 @@ namespace UserService.BLL.Handlers.CommandHandlers
             return new TokenModel { AccessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken), RefreshToken = newRefreshToken };
         }
 
-        private async Task<User> GetUserAndValidateRefreshToken(ClaimsPrincipal principal, string refreshToken, CancellationToken cancellationToken)
+        private async Task<UserEntity> GetUserAndValidateRefreshToken(ClaimsPrincipal principal, string refreshToken, CancellationToken cancellationToken)
         {
             var username = principal.Identity!.Name;
             var user = await _unitOfWork.UserManagers.FindByNameAsync(username!);

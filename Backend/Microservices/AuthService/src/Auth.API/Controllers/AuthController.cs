@@ -78,7 +78,6 @@ namespace Library.WebAPI.Controllers
         public async Task<IActionResult> RevokeAll(CancellationToken cancellationToken)
         {
             _logger.LogInformation("[RevokeAll] Revoke all tokens attempt started.");
-
             var command = new RevokeAllTokensCommand();
             await _mediator.Send(command, cancellationToken);
 

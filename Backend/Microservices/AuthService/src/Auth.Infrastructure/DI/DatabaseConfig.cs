@@ -9,7 +9,7 @@ namespace UserService.DAL.DI
     {
         public static void ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AuthDbContext>(opt =>
+            services.AddDbContext<UserDbContext>(opt =>
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
     }

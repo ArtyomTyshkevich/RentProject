@@ -5,9 +5,9 @@ using UserService.DAL.Entities;
 
 namespace UserService.DAL.Data
 {
-    public class AuthDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class UserDbContext : IdentityDbContext<UserService.DAL.Entities.UserEntity, IdentityRole<Guid>, Guid>
     {
-        public AuthDbContext(DbContextOptions<AuthDbContext> options)
+        public UserDbContext(DbContextOptions<UserDbContext> options)
             : base(options)
         {
             if (Database.IsRelational())

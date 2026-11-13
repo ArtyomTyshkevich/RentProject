@@ -13,7 +13,7 @@ namespace UserService.BLL.Extensions
 {
     public static class JwtBearerExtensions
     {
-        public static List<Claim> CreateClaims(this User user, List<IdentityRole<Guid>> roles)
+        public static List<Claim> CreateClaims(this UserEntity user, List<IdentityRole<Guid>> roles)
         {
             var claims = new List<Claim>
         {
