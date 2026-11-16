@@ -1,5 +1,6 @@
-﻿using UserService.BLL.Interfaces;
-using Library.Data.Repositories;
+﻿using Library.Data.Repositories;
+using User.BLL.Interfaces;
+using UserService.BLL.Interfaces;
 
 namespace Library.Application.Interfaces
 {
@@ -7,6 +8,8 @@ namespace Library.Application.Interfaces
     {
         IUserRepository Users { get; }
         IUserManagerRepository UserManagers { get; }
+        IReviewRepository ReviewRepository { get; }
+        IProsRepository ProsRepository { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }

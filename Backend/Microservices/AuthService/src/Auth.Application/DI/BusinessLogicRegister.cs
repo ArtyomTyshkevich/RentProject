@@ -1,12 +1,15 @@
-﻿using UserService.BLL.Interfaces;
-using UserService.BLL.Mappers;
-using UserService.BLL.Repositories.UnitOfWork;
-using UserService.DAL.DI;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using Library.Application.Interfaces;
 using Library.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using User.BLL.Interfaces;
+using User.BLL.Repositories;
+using UserService.BLL.Interfaces;
+using UserService.BLL.Mapping.Profiles;
+using UserService.BLL.Repositories.UnitOfWork;
+using UserService.DAL.DI;
+using UserService.DAL.Repositories;
 
 namespace UserService.BLL.DI
 {
@@ -20,8 +23,10 @@ namespace UserService.BLL.DI
             services.ConfigureDatabase(configuration);
             services.ConfigureIdentity();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IProsRepository, ProsRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddAutoMapper(typeof(UserMappingProfile));
+            services.AddAutoMapper(typeof(ProsMappingProfile));
         }
     }
 }

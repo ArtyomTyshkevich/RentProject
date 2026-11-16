@@ -8,5 +8,6 @@ namespace UserService.DAL.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public ProsTypes ProsType { get; set; }
+        public List<Review> Reviews { get; set; } = new();
     }
 }

@@ -1,9 +1,9 @@
-using UserService.BLL.Commands;
 using UserService.BLL.DTOs.Identity;
-using UserService.BLL.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using User.BLL.CQRS.Auth.Queries;
+using User.BLL.CQRS.Auth.Commands;
 
 namespace Library.WebAPI.Controllers
 {

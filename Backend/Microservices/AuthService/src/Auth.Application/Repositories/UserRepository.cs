@@ -8,30 +8,30 @@ namespace Library.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly UserDbContext _authDbContext;
+        private readonly UserDbContext _userDbContext;
 
-        public UserRepository(UserDbContext authDbContext)
+        public UserRepository(UserDbContext userDbContext)
         {
-            _authDbContext = authDbContext;
+            _userDbContext = userDbContext;
         }
 
         public async Task<List<UserEntity>> GetAsync(CancellationToken cancellationToken)
         {
-            return await _authDbContext.Users
+            return await _userDbContext.Users
                                             .Include(user => user.UserName)
                                             .ToListAsync(cancellationToken);
         }
 
         public async Task<UserEntity?> GetByIdAsync(Guid userId, CancellationToken cancellationToken)
         {
-            return await _authDbContext.Users
+            return await _userDbContext.Users
                                  .FirstOrDefaultAsync(user => user.Id == userId, cancellationToken);
         }
 
         public async Task<List<IdentityRole<Guid>>> GetRolesAsync(UserEntity user, CancellationToken cancellationToken)
         {
-            var roles = await _authDbContext.Roles
-                .Where(role => _authDbContext.UserRoles
+            var roles = await _userDbContext.Roles
+                .Where(role => _userDbContext.UserRoles
                     .Where(contextUser => contextUser.UserId == user.Id)
                     .Select(contextUser => contextUser.RoleId)
                     .Contains(role.Id))
@@ -42,23 +42,23 @@ namespace Library.Data.Repositories
 
         public async Task<UserEntity> GetByEmailAsync(string Email, CancellationToken cancellationToken)
         {
-            return await _authDbContext.Users
+            return await _userDbContext.Users
                 .FirstAsync(user => user.Email == Email, cancellationToken);
         }
         public async Task UpdateAsync(UserEntity user, CancellationToken cancellationToken = default)
         {
-            _authDbContext.Users
+            _userDbContext.Users
                 .Update(user);
         }
 
         public async Task DeleteAsync(Guid userId, CancellationToken cancellationToken = default)
         {
-            var user = await _authDbContext.Users
+            var user = await _userDbContext.Users
                 .FindAsync(userId, cancellationToken);
 
             if (user != null)
             {
-                _authDbContext.Users
+                _userDbContext.Users
                     .Remove(user);
             }
         }
