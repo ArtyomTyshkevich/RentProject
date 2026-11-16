@@ -38,21 +38,46 @@ namespace User.BLL.Repositories
 
         public async Task<Review> AddAsync(Review review, CancellationToken ct = default)
         {
+            // Прикрепляем Pros к контексту, чтобы EF не пытался их создавать (INSERT)
+            foreach (var pros in review.Pros)
+            {
+                var entry = _context.Entry(pros);
+                if (entry.State == EntityState.Detached)
+                {
+                    _context.Pros.Attach(pros);
+                }
+            }
+
             await _context.Reviews.AddAsync(review, ct);
-            await _context.SaveChangesAsync(ct);
             return review;
         }
 
-        public async Task UpdateAsync(Review review, CancellationToken ct = default)
+        public Task UpdateAsync(Review review, CancellationToken ct = default)
         {
-            _context.Reviews.Update(review);
-            await _context.SaveChangesAsync(ct);
+            // Прикрепляем Review
+            _context.Reviews.Attach(review);
+
+            // Помечаем Review как Modified, чтобы EF обновил его поля
+            _context.Entry(review).State = EntityState.Modified;
+
+            // Для каждого Pros: помечаем как Unchanged, чтобы EF не пытался их вставить/обновить
+            foreach (var pros in review.Pros)
+            {
+                var entry = _context.Entry(pros);
+                if (entry.State == EntityState.Detached)
+                {
+                    _context.Pros.Attach(pros);
+                }
+                entry.State = EntityState.Unchanged;
+            }
+
+            return Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(Review review, CancellationToken ct = default)
+        public Task DeleteAsync(Review review, CancellationToken ct = default)
         {
             _context.Reviews.Remove(review);
-            await _context.SaveChangesAsync(ct);
+            return Task.CompletedTask; // Убрали async, так как нет await
         }
 
         public Task<bool> ExistsAsync(Guid id, CancellationToken ct = default) =>
