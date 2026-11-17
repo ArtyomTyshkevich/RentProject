@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Auth.Infrastructure\User.DAL.csproj" />
+    <ProjectReference Include="..\User.Infrastructure\User.DAL.csproj" />
   </ItemGroup>
 
 </Project>
