@@ -1,0 +1,39 @@
+version: '3.9'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  user.api:
+    container_name: user-api
+    build:
+      context: .
+      dockerfile: src/User.API/Dockerfile
+    networks:
+      - backend
+    environment:
+      - Jwt__Secret=superSecretKey@345432242344324245
+      - Jwt__Issuer=https://localhost:5001 
+      - Jwt__Audience=https://localhost:5001
+      - Jwt__TokenValidityInMinutes=1
+      - ConnectionStrings__DefaultConnection=Server=authdb;Database=AuthDb;User Id=sa;Password=password@12345#;TrustServerCertificate=True;
+      - GrpcSettings__ChatServiceUrl=https://chat.webapi:7001
+      - GrpcSettings__GameServiceUrl=https://game.webapi:7002
+      - GrpcSettings__ProfileServiceUrl=https://profile.api:7003
+    depends_on:
+      - userdb
+    ports:
+      - "8002:80"
+      - "8082:443"
+
+  authdb:
+      container_name: user-db
+      image: mcr.microsoft.com/mssql/server:2022-latest
+      environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=password@12345#
+      networks:
+        - backend
+      ports:
+        - "8007:1433"
