@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Auth.Application\User.BLL.csproj" />
+    <ProjectReference Include="..\User.Application\User.BLL.csproj" />
   </ItemGroup>
 
 </Project>
