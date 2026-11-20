@@ -1,4 +1,9 @@
-﻿using Chat.WebApi.Configuration;
+﻿using Chat.Application.Services.Implementation;
+using Chat.Applicaton.Interfaces;
+using Chat.Applicaton.Mappers;
+using Chat.Data.Repositories;
+using Chat.Data.Repositories.UnitOfWork;
+using Chat.WebApi.Configuration;
 
 namespace Chat.WebApi.DI
 {
@@ -7,6 +12,10 @@ namespace Chat.WebApi.DI
         public static void AddBusinessLogic(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureDatabase(configuration);
+            services.AddAutoMapper(cfg => { }, typeof(ChatRoomProfile));
+            services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IChatRoomService, ChatRoomService>();
         }
     }
 }
