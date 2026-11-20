@@ -24,14 +24,12 @@ namespace Chat.Data.Repositories
         public async Task<IEnumerable<ChatRoom>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.ChatRooms
-                .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<ChatRoom>> GetByMemberAsync(Guid memberId, CancellationToken cancellationToken = default)
         {
             var rooms = await _context.ChatRooms
-                .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
             return rooms.Where(r => r.Members.Contains(memberId));
@@ -40,7 +38,6 @@ namespace Chat.Data.Repositories
         public async Task<IEnumerable<ChatRoom>> GetByCreatorAsync(Guid creatorId, CancellationToken cancellationToken = default)
         {
             return await _context.ChatRooms
-                .AsNoTracking()
                 .Where(r => r.Creator == creatorId)
                 .ToListAsync(cancellationToken);
         }
@@ -48,7 +45,6 @@ namespace Chat.Data.Repositories
         public async Task<IEnumerable<ChatRoom>> GetByTypeAsync(ChatRoomType type, CancellationToken cancellationToken = default)
         {
             return await _context.ChatRooms
-                .AsNoTracking()
                 .Where(r => r.ChatRoomType == type)
                 .ToListAsync(cancellationToken);
         }
