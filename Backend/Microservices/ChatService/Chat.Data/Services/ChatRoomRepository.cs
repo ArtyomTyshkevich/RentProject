@@ -1,6 +1,6 @@
 ﻿using Chat.Application.DTOs;
 using Chat.Applicaton.Interfaces;
-using Chat.Domain.Models;
+using Chat.Domain.Models.Entites;
 
 namespace Chat.Application.Services.Implementation
 {

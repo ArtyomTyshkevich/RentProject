@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Chat.Domain.Models;
+using Chat.Domain.Models.Entites;
 
 namespace Chat.Data.Context
 {

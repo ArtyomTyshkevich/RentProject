@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Chat.Application.DTOs;
-using Chat.Domain.Models;
+using Chat.Domain.Models.Entites;
 
 namespace Chat.Applicaton.Mappers
 {

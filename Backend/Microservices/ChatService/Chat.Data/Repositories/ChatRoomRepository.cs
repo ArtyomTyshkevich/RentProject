@@ -1,7 +1,7 @@
 ﻿using Chat.Applicaton.Interfaces;
 using Chat.Data.Context;
 using Chat.Domain.Enums;
-using Chat.Domain.Models;
+using Chat.Domain.Models.Entites;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Data.Repositories

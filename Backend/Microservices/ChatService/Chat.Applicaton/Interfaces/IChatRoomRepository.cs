@@ -1,5 +1,5 @@
 ﻿using Chat.Domain.Enums;
-using Chat.Domain.Models;
+using Chat.Domain.Models.Entites;
 
 namespace Chat.Applicaton.Interfaces
 {

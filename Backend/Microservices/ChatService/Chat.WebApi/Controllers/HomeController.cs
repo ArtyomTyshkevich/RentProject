@@ -1,5 +1,4 @@
 ﻿using Chat.Application.DTOs;
-using Chat.Application.Services;
 using Chat.Applicaton.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

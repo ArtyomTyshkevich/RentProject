@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Chat.Domain.Enums;
 
-namespace Chat.Domain.Models
+namespace Chat.Domain.Models.Entites
 {
     public class ChatRoom
     {
