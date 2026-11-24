@@ -1,5 +1,6 @@
 ﻿using Chat.Application.DTOs;
 using Chat.Applicaton.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat.Api.Controllers
@@ -14,7 +15,7 @@ namespace Chat.Api.Controllers
         {
             _service = service;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<ChatRoomDto>>> GetAll(CancellationToken cancellationToken)
         {

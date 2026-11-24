@@ -17,9 +17,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.UseRouting();
 app.UseCors("_allowSignalRCors");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<ChatHub>("/ChatHub").RequireCors("_allowSignalRCors");

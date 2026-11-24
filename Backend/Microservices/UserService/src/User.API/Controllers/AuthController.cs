@@ -85,5 +85,11 @@ namespace Library.WebAPI.Controllers
 
             return Ok();
         }
+        [Authorize]
+        [HttpPost("test")]
+        public async Task<IActionResult> Test(CancellationToken cancellationToken)
+        {
+            return Ok();
+        }
     }
 }
