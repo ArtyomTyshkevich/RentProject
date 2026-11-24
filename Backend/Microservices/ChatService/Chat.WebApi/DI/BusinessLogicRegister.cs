@@ -15,6 +15,8 @@ namespace Chat.WebApi.DI
             services.ConfigureDatabase(configuration);
             services.ConfigureMongoDatabase(configuration);
             services.ConfigureCors(configuration);
+            services.ConfigureAuthentication(configuration);
+            services.ConfigureSwagger();
             services.AddAutoMapper(cfg => { }, typeof(ChatRoomProfile));
             services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
