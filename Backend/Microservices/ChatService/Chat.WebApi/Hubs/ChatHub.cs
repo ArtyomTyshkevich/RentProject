@@ -12,7 +12,7 @@ namespace Chat.WebApi.Hubs
             _messageService = messageService;
         }
 
-        public async Task GetMessages() // Убрали возвращаемый тип, теперь это Task (void)
+        public async Task GetMessages()
         {
             var messagesFromDb = await _messageService.GetAllMessagesAsync();
             var result = messagesFromDb.Cast<object>().ToList();
@@ -23,8 +23,6 @@ namespace Chat.WebApi.Hubs
                 Sender = "System",
                 Date = DateTime.UtcNow
             });
-
-            // Отправляем ответ обратно ТОЛЬКО вызывающему клиенту
             await Clients.Caller.SendAsync("ReceiveMessages", result);
         }
     }
