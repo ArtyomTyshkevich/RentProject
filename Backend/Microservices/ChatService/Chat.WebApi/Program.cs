@@ -1,4 +1,5 @@
 using Chat.WebApi.DI;
+using Chat.WebApi.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("_allowSignalRCors");
 
 app.MapControllers();
-
+app.MapHub<ChatHub>("/ChatHub").RequireCors("_allowSignalRCors");
 app.Run();
